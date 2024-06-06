@@ -74,10 +74,8 @@ def get_own_profile_info(driver):
         current_position = driver.find_element(By.CSS_SELECTOR, ".text-body-medium.break-words").text
         profile_data.append({
             "Name": name,
-            "Profile Link": "https://www.linkedin.com/in/me/",
+            "Profile Link": "https://www.linkedin.com/in/{name}/",
             "Current Position": current_position,
-            "Location": "NA",
-            "Connections": "NA"
         })
         print(f"Own profile extracted: {name}, {current_position}")
     except Exception as e:
@@ -87,7 +85,7 @@ def get_own_profile_info(driver):
 
 def save_to_csv(data, filename):
     with open(filename, mode='w', newline='', encoding='utf-8') as file:
-        fieldnames = ["Name", "Profile Link", "Current Position", "Location", "Connections"]
+        fieldnames = ["Name", "Current Position","Profile Link"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(data)

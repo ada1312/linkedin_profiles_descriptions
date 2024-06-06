@@ -64,7 +64,10 @@ def get_profile_info(driver):
     
     return profile_data
 
-def get_own_profile_info(driver):
+#this only comes in handy if you want to extract your own profile info
+#meaning you are part of alumni, but your name is not in the list
+#if that happens ucomment the function and call it in the main function (is commented out)
+""" def get_own_profile_info(driver):
     driver.get("https://www.linkedin.com/in/me/")
     time.sleep(3)
     profile_data = []
@@ -81,7 +84,7 @@ def get_own_profile_info(driver):
     except Exception as e:
         print(f"Error extracting own profile info: {e}")
 
-    return profile_data
+    return profile_data """
 
 def save_to_csv(data, filename):
     with open(filename, mode='w', newline='', encoding='utf-8') as file:
@@ -102,10 +105,12 @@ def scrape_alumni_profiles(alumni_url):
         profile_data = get_profile_info(driver)
         
         # Extract own profile
-        own_profile_data = get_own_profile_info(driver)
+        #for own prfile uncomment the line below
+        #own_profile_data = get_own_profile_info(driver)
         
         # Add own profile to the profile data
-        profile_data.extend(own_profile_data)
+        #for own prfile uncomment the line below
+        #profile_data.extend(own_profile_data)
         
         save_to_csv(profile_data, "linkedin_alumni_profiles.csv")
         print(f"Scraped {len(profile_data)} profiles to linkedin_alumni_profiles.csv")
